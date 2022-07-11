@@ -23,7 +23,7 @@ const DataList = ({ data, unGroupedData }) => {
   }, [data, dispatch]);
 
   return (
-    <div className="grid grid-cols-1 gap-16 mx-auto">
+    <div className="grid grid-cols-1 gap-32 mx-auto">
       {searchQueryResult.length > 0 &&
       searchQueryResult.length < state.length - 3
         ? searchQueryResult.map((result, index) => {

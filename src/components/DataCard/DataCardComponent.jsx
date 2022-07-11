@@ -5,7 +5,7 @@ const DataCardComponent = ({ data }) => {
     <div className="flex flex-1 border border-slate-300 justify-between flex-wrap w-full gap-10 items-center cursor-pointer p-4 hover:bg-slate-100">
       <div className="flex justify-center items-center h-20 w-20 bg-neutral-300">
         {data?.company?.logoUrl === null ? (
-          <p className="uppercase font-bold text-[22px]">
+          <p className="uppercase font-bold text-[22px] ">
             {(data?.company?.name).substring(0, 2)}
           </p>
         ) : (
@@ -17,7 +17,7 @@ const DataCardComponent = ({ data }) => {
       </div>
       <div className="flex flex-1 items-center flex-wrap gap-4">
         <div className="flex w-[200px] flex-col">
-          <h1 className="text-xl font-bold p-0 m-0 leading-5 break-words max-w-[200px]">
+          <h1 className="text-xl font-bold text-slate-500 p-0 m-0 leading-5 break-words max-w-[200px]">
             {data?.title}
           </h1>
           <span className="text-slate-400 leading-8">

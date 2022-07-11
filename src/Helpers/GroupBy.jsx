@@ -4,10 +4,9 @@ const RestructuredData = (key, allData) => {
 
     if (cachedData[newData] == null) cachedData[newData] = [];
     cachedData[newData].push(data);
+
     return cachedData;
   }, {});
 };
-
-
 
 export default RestructuredData;
