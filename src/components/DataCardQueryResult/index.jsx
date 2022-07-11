@@ -2,7 +2,10 @@ import React from "react";
 
 const DataCardQueryResult = ({ data }) => {
   return (
-    <div className="flex flex-1 border border-slate-300 justify-between flex-wrap w-full gap-10 items-center cursor-pointer p-4 hover:bg-slate-100">
+    <div
+      className="flex flex-1 border border-slate-300 justify-between flex-wrap w-full gap-10 items-center cursor-pointer p-4 hover:bg-slate-100"
+      onClick={() => alert("No data Available at the moment...")}
+    >
       <div className="flex justify-center items-center h-20 w-20 bg-neutral-300">
         {data?.company?.logoUrl === null ? (
           <p className="uppercase font-bold text-[22px]">
