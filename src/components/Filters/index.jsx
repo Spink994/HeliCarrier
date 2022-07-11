@@ -4,7 +4,7 @@ import Button from "../Button";
 
 const Filters = () => {
   const { dispatch } = useContext(JobContext);
-
+  
   const handleFilter = (payload) => {
     dispatch({ type: ACTIONS.SEARCH_QUERY, payload: payload });
   };

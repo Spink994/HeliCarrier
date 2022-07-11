@@ -17,15 +17,16 @@ const Home = () => {
   const { searchQueryResult, searchQuery } = useContext(JobContext);
 
   //getting the loading state and data from the graphql server
-  const { loading, data } = useQuery(getData);
+  const { loading, data, error } = useQuery(getData);
 
   const [groupedData, setGroupedData] = useState([]);
 
   useEffect(() => {
     // A helper function that helps me restructure the my data according to i want it
     // to be grouped; In this case, the date it was created.
-    if (data) setGroupedData(RestructuredData("createdAt", data.jobs));
-  }, [data]);
+    if (!error && !loading && data)
+      setGroupedData(RestructuredData("createdAt", data.jobs));
+  }, [data, error, loading]);
 
   //The spinner's dependencies
   const override = {
@@ -64,7 +65,7 @@ const Home = () => {
               </div>
             )}
             <Filters />
-            <DataList data={groupedData} unGroupedData={data} />
+            <DataList data={groupedData || null} unGroupedData={data || null} />
           </div>
         </Container>
       )}

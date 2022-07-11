@@ -28,6 +28,7 @@ const JobStateContext = ({ children }) => {
             job.company?.name.toLowerCase().includes(payload.toLowerCase()) ||
             job.remotes[0]?.type.toLowerCase().includes(payload.toLowerCase())
         );
+
         setSearchQuery(payload);
         setSearchQueryResult(filteredState);
         return state;
@@ -37,7 +38,7 @@ const JobStateContext = ({ children }) => {
     }
   };
 
-  const [state, dispatch] = useReducer(jobReducer, ["Balls", "Kettles"]);
+  const [state, dispatch] = useReducer(jobReducer, []);
 
   const allGlobalStates = {
     state,
