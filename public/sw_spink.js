@@ -1,4 +1,4 @@
-const CACHE_NAME = "version-2";
+const CACHE_NAME = "version-1";
 
 //Install
 self.addEventListener("install", (e) =>
@@ -26,7 +26,7 @@ self.addEventListener("activate", (e) => {
 
 //Fetch
 self.addEventListener("fetch", (e) => {
-  console.log("Fetching data");
+  console.log("Fetching data", e);
 
   e.respondWith(
     fetch(e.request)
@@ -41,7 +41,9 @@ self.addEventListener("fetch", (e) => {
 
         return resposnse;
       })
-      .catch(() => caches.match(e.request).then((response) => response))
+      .catch((err) => {
+        console.log("Error: ", err);
+        caches.match(e.request).then((res) => res);
+      })
   );
 });
-

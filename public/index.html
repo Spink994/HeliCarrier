@@ -37,14 +37,23 @@
         deferredInstall = e;
       });
 
-      document.getElementById("root").addEventListener("click", () => {
-        alert("scrolling!");
+      let count = 0;
+      window.addEventListener("click", () => {
+        count++;
+        if (count >= 1) {
+          deferredInstall = null;
+          return;
+        }
+        if (deferredInstall === null) return;
         deferredInstall.prompt();
-        deferredInstall.userChoice.then((choice) => {
-          if (choice.outcome == "accepted") {
+        deferredInstall.userChoice.then(({ outcome }) => {
+          if (outcome === "accepted") {
             console.log("Installed Application");
-          } else {
-            console.log("Cancelled");
+            deferredInstall = null;
+          }
+          if (outcome === "dismissed") {
+            console.log("dismissed");
+            deferredInstall = null;
           }
         });
       });
