@@ -26,8 +26,6 @@ self.addEventListener("activate", (e) => {
 
 //Fetch
 self.addEventListener("fetch", (e) => {
-  console.log("Fetching data", e);
-
   e.respondWith(
     fetch(e.request)
       .then((resposnse) => {

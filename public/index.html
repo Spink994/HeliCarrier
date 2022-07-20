@@ -48,11 +48,9 @@
         deferredInstall.prompt();
         deferredInstall.userChoice.then(({ outcome }) => {
           if (outcome === "accepted") {
-            console.log("Installed Application");
             deferredInstall = null;
           }
           if (outcome === "dismissed") {
-            console.log("dismissed");
             deferredInstall = null;
           }
         });
