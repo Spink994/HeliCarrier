@@ -16,45 +16,5 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("./sw_spink.js")
-            .then((registration) =>
-              console.log("Successfully Registered: ", registration.scope)
-            )
-            .catch((err) => console.log("Failed to register: ", err));
-        });
-      }
-
-      let deferredInstall;
-
-      //Listen to the beforeInstall
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredInstall = e;
-      });
-
-      let count = 0;
-      window.addEventListener("click", () => {
-        count++;
-        if (count >= 1) {
-          deferredInstall = null;
-          return;
-        }
-        if (deferredInstall === null) return;
-        deferredInstall.prompt();
-        deferredInstall.userChoice.then(({ outcome }) => {
-          if (outcome === "accepted") {
-            deferredInstall = null;
-          }
-          if (outcome === "dismissed") {
-            deferredInstall = null;
-          }
-        });
-      });
-    </script>
   </body>
 </html>
