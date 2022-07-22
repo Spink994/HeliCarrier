@@ -73,8 +73,7 @@ self.addEventListener("message", (event) => {
 // Any other custom service worker logic can go here.
 // Set up asset cache
 registerRoute(
-  ({ request }) =>
-    ["style", "script", "worker", "json"].includes(request.destination),
+  ({ request }) => ["json"].includes(request.destination),
   new StaleWhileRevalidate({
     cacheName: "asset-cache",
     plugins: [
