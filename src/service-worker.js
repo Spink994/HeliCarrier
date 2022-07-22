@@ -11,7 +11,7 @@ import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate, NetworkFirst } from "workbox-strategies";
+import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
@@ -62,8 +62,6 @@ registerRoute(
   })
 );
 
-registerRoute(/https:\/\/api\.graphql\.jobs/, new NetworkFirst(), "GET");
-
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener("message", (event) => {
@@ -73,3 +71,16 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+// Set up asset cache
+registerRoute(
+  ({ request }) =>
+    ["style", "script", "worker", "json"].includes(request.destination),
+  new StaleWhileRevalidate({
+    cacheName: "asset-cache",
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
