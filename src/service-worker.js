@@ -62,7 +62,7 @@ registerRoute(
   })
 );
 
-registerRoute(/https:\/\/api\.graphql\.jobs/, NetworkFirst(), "GET");
+registerRoute(/https:\/\/api\.graphql\.jobs/, new NetworkFirst(), "GET");
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
