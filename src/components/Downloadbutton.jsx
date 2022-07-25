@@ -21,7 +21,7 @@ const Downloadbutton = ({ setResponse }) => {
   };
   return (
     <button
-      onClick={() => setResponse(true)}
+      onClick={handleBeforeInstall}
       className="flex justify-center rounded-full items-center fixed bottom-8 right-8 bg-slate-900 h-8 w-8"
     >
       <ImDownload className="text-white text-xl" />
