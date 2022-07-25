@@ -8,7 +8,9 @@ const DataList = ({ data, unGroupedData }) => {
 
   //Storing the job data to my local storage
   useEffect(() => {
-    localStorage.setItem("jobsData", JSON.stringify(unGroupedData));
+    if (unGroupedData !== null || unGroupedData !== undefined) {
+      localStorage.setItem("jobsData", JSON.stringify(unGroupedData));
+    }
   }, [unGroupedData]);
 
   useEffect(() => {

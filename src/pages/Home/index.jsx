@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { JobContext } from "../../ContextAPI/JobStateContext";
+import Downloadbutton from "../../components/Downloadbutton";
 
 const Home = () => {
   //This portion of code is coming from the ContextAPI i created to manage my app's state
@@ -37,7 +38,7 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-full mt-8">
+    <div className="relative max-w-full mt-8">
       {loading ? (
         <div className="max-w-full h-screen flex justify-center items-center">
           <ClipLoader loading={loading} cssOverride={override} size={150} />
@@ -69,6 +70,7 @@ const Home = () => {
           </div>
         </Container>
       )}
+      <Downloadbutton />
     </div>
   );
 };
