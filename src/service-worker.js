@@ -72,10 +72,11 @@ self.addEventListener("message", (event) => {
 
 // Any other custom service worker logic can go here.
 // Set up asset cache
+const apiPath = "api.graphql.jobs";
 registerRoute(
-  ({ request }) => ["json"].includes(request.destination),
+  ({ request }) => apiPath.match(request.destination),
   new StaleWhileRevalidate({
-    cacheName: "asset-cache",
+    cacheName: "apiData",
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
