@@ -77,10 +77,6 @@ registerRoute(
   ({ request }) => apiPath.match(request.destination),
   new StaleWhileRevalidate({
     cacheName: "apiData",
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
+    plugins: [{ statuses: [0, 200] }],
   })
 );
