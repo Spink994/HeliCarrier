@@ -30,6 +30,17 @@ const Home = () => {
       setGroupedData(RestructuredData("createdAt", data.jobs));
   }, [data, error, loading]);
 
+  useEffect(() => {
+    const responseFromStorage = JSON.parse(localStorage.getItem("response"));
+    if (responseFromStorage) {
+      setResponse(responseFromStorage);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("response", JSON.stringify(response));
+  }, [response]);
+
   //The spinner's dependencies
   const override = {
     display: "block",

@@ -2,7 +2,7 @@ import React from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
 
-const Downloadbutton = ({ response, setResponse }) => {
+const Downloadbutton = ({ setResponse }) => {
   // Installation must be done by a user gesture! Here, the button click
   const handleBeforeInstall = (e) => {
     // Show the prompt
@@ -21,7 +21,7 @@ const Downloadbutton = ({ response, setResponse }) => {
   };
   return (
     <button
-      onClick={handleBeforeInstall}
+      onClick={() => setResponse(true)}
       className="flex justify-center rounded-full items-center fixed bottom-8 right-8 bg-slate-900 h-8 w-8"
     >
       <ImDownload className="text-white text-xl" />
