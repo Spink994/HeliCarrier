@@ -2,22 +2,23 @@ import React from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
 
-// Installation must be done by a user gesture! Here, the button click
-const handleBeforeInstall = (e) => {
-  // Show the prompt
-  deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
-  deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === "accepted") {
-      console.log("User accepted the A2HS prompt");
-    } else {
-      console.log("User dismissed the A2HS prompt");
-    }
-    deferredPrompt = null;
-  });
-};
-
-const Downloadbutton = () => {
+const Downloadbutton = ({ response, setResponse }) => {
+  // Installation must be done by a user gesture! Here, the button click
+  const handleBeforeInstall = (e) => {
+    // Show the prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the A2HS prompt");
+        setResponse(true);
+      } else {
+        console.log("User dismissed the A2HS prompt");
+        setResponse(false);
+      }
+      deferredPrompt = null;
+    });
+  };
   return (
     <button
       onClick={handleBeforeInstall}

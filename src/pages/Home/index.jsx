@@ -16,6 +16,7 @@ import Downloadbutton from "../../components/Downloadbutton";
 const Home = () => {
   //This portion of code is coming from the ContextAPI i created to manage my app's state
   const { searchQueryResult, searchQuery } = useContext(JobContext);
+  const [response, setResponse] = useState(false);
 
   //getting the loading state and data from the graphql server
   const { loading, data, error } = useQuery(getData);
@@ -70,7 +71,9 @@ const Home = () => {
           </div>
         </Container>
       )}
-      <Downloadbutton />
+      {response ? null : (
+        <Downloadbutton response={response} setResponse={setResponse} />
+      )}
     </div>
   );
 };
