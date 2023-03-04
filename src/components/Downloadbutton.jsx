@@ -23,6 +23,7 @@ const Downloadbutton = ({ setResponse }) => {
   useEffect(() => {
     window.addEventListener("load", () => {
       navigator.serviceWorker.ready.then((data) => console.log(data));
+      console.log(navigator.serviceWorker.getRegistration());
     });
   }, []);
 
