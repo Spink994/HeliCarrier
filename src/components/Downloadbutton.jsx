@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
 
@@ -19,6 +19,14 @@ const Downloadbutton = ({ setResponse }) => {
       deferredPrompt = null;
     });
   };
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      console.log(navigator.serviceWorker);
+      console.log(navigator.serviceWorker.getRegistration());
+    });
+  }, []);
+
   return (
     <button
       onClick={handleBeforeInstall}
