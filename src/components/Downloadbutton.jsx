@@ -24,6 +24,7 @@ const Downloadbutton = ({ setResponse }) => {
     window.addEventListener("load", () => {
       navigator.serviceWorker.ready.then((data) => console.log(data));
       console.log(navigator.serviceWorker.getRegistration());
+      console.log(navigator.serviceWorker);
     });
   }, []);
 
