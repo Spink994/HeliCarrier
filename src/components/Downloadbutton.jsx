@@ -25,6 +25,7 @@ const Downloadbutton = ({ setResponse }) => {
       navigator.serviceWorker.ready.then((data) => console.log(data));
       console.log(navigator.serviceWorker.getRegistration());
       console.log(navigator.serviceWorker);
+      console.log(deferredPrompt.userChoice);
     });
   }, []);
 
