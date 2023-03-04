@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
@@ -26,8 +27,9 @@ const Downloadbutton = ({ setResponse }) => {
       console.log(navigator.serviceWorker.getRegistration());
       console.log(navigator.serviceWorker);
       console.log(deferredPrompt);
+      console.log(deferredPrompt?.userChoice);
     });
-  }, []);
+  }, [deferredPrompt]);
 
   return (
     <button
