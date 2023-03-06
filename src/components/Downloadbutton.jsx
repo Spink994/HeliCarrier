@@ -31,8 +31,9 @@ const Downloadbutton = ({ setResponse }) => {
       });
       console.log(navigator.serviceWorker.getRegistration());
       console.log(navigator.serviceWorker);
-      console.log(checkInstallationPrompt);
     });
+
+    console.log(checkInstallationPrompt);
 
     window.addEventListener("beforeinstallprompt", function (e) {
       setCheckInstallationPrompt(true);
