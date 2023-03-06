@@ -46,14 +46,7 @@ const Home = () => {
     window.addEventListener("load", () => {
       navigator.serviceWorker.ready.then((worker) => {
         if (worker.waiting !== null) {
-          // const notificationConfig = {
-          //   title: 'Update Available',
-          //   body: 'A new update is available',
-          //   type: 'success',
-          //   duration: 2000,
-          //   position: 'top',
-          // };
-          // openNotification(notificationConfig);
+          console.log("A new update is available");
           setTimeout(() => {
             window.location.reload(true);
           }, 2300);
