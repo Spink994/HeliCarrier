@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
 
 const Downloadbutton = ({ setResponse }) => {
-  const [checkInstallationPrompt, setCheckInstallationPrompt] = useState(false);
   // Installation must be done by a user gesture! Here, the button click
   const handleBeforeInstall = (e) => {
     // Show the prompt
@@ -21,26 +20,6 @@ const Downloadbutton = ({ setResponse }) => {
       deferredPrompt = null;
     });
   };
-
-  useEffect(() => {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.ready.then((worker) => {
-        console.log(worker);
-        if (worker.waiting !== null)
-          console.log("A new updtate is now available");
-      });
-      console.log(navigator.serviceWorker.getRegistration());
-      console.log(navigator.serviceWorker);
-    });
-
-    console.log(checkInstallationPrompt);
-
-    window.addEventListener("beforeinstallprompt", function (e) {
-      setCheckInstallationPrompt(true);
-      e.preventDefault();
-      console.log(e);
-    });
-  }, [checkInstallationPrompt]);
 
   return (
     <button
