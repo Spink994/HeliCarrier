@@ -17,6 +17,7 @@ const Home = () => {
   //This portion of code is coming from the ContextAPI i created to manage my app's state
   const { searchQueryResult, searchQuery } = useContext(JobContext);
   const [response, setResponse] = useState(false);
+  const [checkInstallationPrompt, setCheckInstallationPrompt] = useState(false);
 
   //getting the loading state and data from the graphql server
   const { loading, data, error } = useQuery(getData);
@@ -40,6 +41,38 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem("response", JSON.stringify(response));
   }, [response]);
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.ready.then((worker) => {
+        if (worker.waiting !== null) {
+          // const notificationConfig = {
+          //   title: 'Update Available',
+          //   body: 'A new update is available',
+          //   type: 'success',
+          //   duration: 2000,
+          //   position: 'top',
+          // };
+          // openNotification(notificationConfig);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 2300);
+        }
+      });
+    });
+
+    const checkResponse = localStorage.getItem("A2HS_prompt");
+    if (checkResponse) setResponse(true);
+    else setResponse(false);
+  }, []);
+
+  // Checking if the installation prompt is ready to be invoked
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      setCheckInstallationPrompt(true);
+    });
+  }, [checkInstallationPrompt]);
 
   //The spinner's dependencies
   const override = {
@@ -82,7 +115,7 @@ const Home = () => {
           </div>
         </Container>
       )}
-      {response ? null : (
+      {checkInstallationPrompt && (
         <Downloadbutton response={response} setResponse={setResponse} />
       )}
     </div>
