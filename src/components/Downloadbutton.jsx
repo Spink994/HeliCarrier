@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ImDownload } from "react-icons/im";
 import { deferredPrompt } from "../serviceWorkerRegistration";
 
 const Downloadbutton = ({ setResponse }) => {
+  const [checkInstallationPrompt, setCheckInstallationPrompt] = useState(false);
   // Installation must be done by a user gesture! Here, the button click
   const handleBeforeInstall = (e) => {
     // Show the prompt
@@ -23,21 +24,22 @@ const Downloadbutton = ({ setResponse }) => {
 
   useEffect(() => {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.ready.then((data) => console.log(data));
+      navigator.serviceWorker.ready.then((worker) => {
+        console.log(worker);
+        if (worker.waiting !== null)
+          console.log("A new updtate is now available");
+      });
       console.log(navigator.serviceWorker.getRegistration());
       console.log(navigator.serviceWorker);
-      console.log(deferredPrompt);
-      console.log(deferredPrompt?.userChoice);
+      console.log(checkInstallationPrompt);
     });
 
     window.addEventListener("beforeinstallprompt", function (e) {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      setCheckInstallationPrompt(true);
       e.preventDefault();
-      // Stash the event so it can be triggered later.
       console.log(e);
-      deferredPrompt = e;
     });
-  }, [deferredPrompt]);
+  }, [checkInstallationPrompt]);
 
   return (
     <button
